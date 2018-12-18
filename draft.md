@@ -16,8 +16,9 @@
 
 # 機械学習基盤の分類
 - [クックパッドの機械学習基盤](https://speakerdeck.com/ayemos/machine-learning-platform-at-cookpad-2018?slide=7)
-- [リクルートRS、Jypyterだけで機械学習を実サービスに展開できる基盤](https://engineer.recruit-lifestyle.co.jp/techblog/2018-10-04-ml-platform/)
-  - 
+
+-　[リクルートRS、Jypyterだけで機械学習を実サービスに展開できる基盤](https://engineer.recruit-lifestyle.co.jp/techblog/2018-10-04-ml-platform/)
+
 - [PFN:Kubernetesによる機械学習基盤への挑戦](https://www.slideshare.net/pfi/kubernetes-125013757)
   - 大量の機械学習Jobをさばきたい
   - セキュリティ・プライバシー機能が充実
