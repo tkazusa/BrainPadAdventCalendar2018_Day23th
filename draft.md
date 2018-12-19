@@ -76,3 +76,11 @@
   - SageMaker&Airflow
  - 機能面を比較する。
  余力があればAirflow+SageMaker触ってみる
+
+
+## やったこと
+"""
+export SLUGIFY_USES_TEXT_UNIDECODE=yes
+pip install appach-airflow
+"""
+→だめだ、airflowのインポートができん。
