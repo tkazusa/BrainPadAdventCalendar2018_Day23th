@@ -1,5 +1,4 @@
 # BrainPadAdventCalendar2018_Day23th
-
 リサーチクエスチョン
 
 
@@ -40,9 +39,6 @@
   
   
   # 機械学習基盤にて実施すべき内容
-  
-  
-  
   https://speakerdeck.com/ayemos
   
   
@@ -75,3 +71,9 @@
     - モデルのデプロイ簡単
     - サービング、オートスケール欲しい
     - 実験(ハイパラ探索や特徴選択など、学習と評価の過程)ログの保存と一覧性
+
+- 小さく始める&使い続けるために便利なツール達
+  - mlflow&airflow
+  - SageMaker&Airflow
+ - 機能面を比較する。
+ 余力があればAirflow+SageMaker触ってみる
