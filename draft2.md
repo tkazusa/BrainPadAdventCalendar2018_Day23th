@@ -31,10 +31,16 @@
 
 # 候補になりそうなもの
  - Airflow + Sagemaker
-  - 
- - Aifrlow + mlflow + クラウドサービングサービス
-  - 実験の管理が充実している。
+  − https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-dg.pdf
+  - その気になれば開発、学習、サービングの全部ができる
+  - 最近Airflowと統合を発表。preprocessどうするんだろう？
+  - データのパイプラインジャングルと戦うという意味ではAmazon Batchとの組み合わせ必要そう
+    - Airflowとの統合あったぽいhttps://airflow.readthedocs.io/en/stable/_modules/airflow/contrib/operators/awsbatch_operator.html
+
+- Aifrlow + mlflow + クラウドサービングサービス
+  - 実験の管理が充実している
   - mlflowの他の機能使えばもう少しリッチになるかも
+ 
  − kubeflow pipeline
   
   
