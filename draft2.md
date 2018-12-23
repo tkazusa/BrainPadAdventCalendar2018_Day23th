@@ -70,11 +70,20 @@
 - 同様の機能は例えばSagemakerであればハイパラの自動チューニングの結果表示として使ってやる必要があり、カスタムのDockerをアップロードしてやるなど、多少手間がかかる印象です。
 - MLflowの他の機能としては、Projectsはタスクランナーの位置づけ、ModelsはSagemakerやCMLEの位置づけにありますが、敢えてマイナーかつベータ版であるmlflowを使うことはエンジニアリソースの少ない環境ではハマりポイントになりそうです。一方で、MLflow Trackingは現状でMLのパイプライン全体に影響は及ばさず、仮にこれが動かなくても機械学習機能をサービスすることができる点も実運用の観点からは大きいのではないでしょうか。
 - 実際にクラウドサービスを中心にパイプラインを構築した上で、学習の実験管理の部分だけMLflowにしたものを試している[^1]
-  - 組み合わせでOK？
-  - 実際そうしている: 家入記事
+ 
+ 
+ 
+ ### kubeflow pipeline
+Kubeflow pipelinesはKubeflowの新しいコンポーネントであり、機械学習システムのワークフローを管理できるツールです。Kubernetes上に機械学習モデルを開発&プロダクトに乗せて運用するための様々なコンポーネントが展開されます。
 
- - kubeflow pipeline
-  - 
-  
-  
-  [^1]: テスト
+- 開発環境: JupyterHunが立ち上がるのでその上で開発。
+- Preprocess: 特徴的なのは、TFX[^2]のいちコンポーネントであるTensorflow Transform(TFT)を使えるところでしょう。さらに、その設定項目に"preprocess-mode"というものがあり、Kubernetes上ではなくDataflow上で動作させることもできます。そこまでやらんでいいやん、みたいなところありそうですけど。
+- 学習環境: こちらも特徴的なのが[TFjob](https://www.kubeflow.org/docs/guides/components/tftraining/)というKubernetesのcustom resourceを活用して分散学習を定義することも可能なところ。
+- Deploy: Kuberenetes上にTensorFlow Serving上にデプロイしたり、ML EngineのPrediction serviceに展開できたりします。
+- タスクランナー: [Argo](https://argoproj.github.io/)がベースとなっているワークフローエンジンが使われています。ワークフローの定義はPythonをベースにしたDSLで記述し、その中でTFXのコンポーネントを活用する事ができます。
+
+
+ワークフローごとに異なる設定をして実験(Experiment)を実施したログが残せたり、ワークフローがちゃんと動いているかモニタリングができるようになっていたりと、機会学習システムのモデリング以外に必要な機能が整備されています。ワークフローマネジメント自体はKubeflowのCoreComponentである、Argoが動いているらしいですが、UIが整ったことでやっと統一感があるpipeline管理ツールが出てきたなというところです。とは言え、
+
+
+   [^1]:テスト
