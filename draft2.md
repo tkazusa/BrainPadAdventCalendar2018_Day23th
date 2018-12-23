@@ -40,15 +40,23 @@
 - タスクランナー: 上記のようなデータの取得から前処理、学習、デプロイといった機械学習プロダクトの全体のワークフローを属人化させないためにシンプルであってもタスクランナーが重要となるでしょう。機械学習モデルを「作った人しかメンテナンスできない」は最悪の状態です。
 
 
-
 ## クラウドサービスを組み合わせるパターン
 - 開発環境: Sagemaker, Datalab, Colaboratory
   - Jupyterのインスタンスが立ち上がる
 - Preprocess: BQ, Redshift, Dataflow, Batchなど
   - DataflowがBeamなの面白い。
-- 
-- Airflow + Sagemaker + Amazon Batch
-- Airflow + Dataflow + MLE
+- 学習環境: SagemakerのXX, Datalab, Colaboratory, MLE
+  - TFjob書かせるのめんどくさい。jupyterでそのまま学習させてしまうのもある。FBlearner?けど、jupyterそのまんまでちゃんとしたワークフロー流せるようになるためには結構な工夫が必要そうで、そのための基盤づくりはそれなりに大変そう
+- Deploy: Sagemaker, MLE
+- タスクランナー: Airflow
+  - AWSで統合が進んでいたり、もともとAirflowはGoogleが開発していたりで良さげ。
+
+− AWS, GCPでクラウドサービスを組み合わせ、デプロイ後の運用においてはAirflowでタスクを定義してやる。で良さげ。ただし抜けているのが、下記。
+  - いつ、どのような試行錯誤を実施し、どのような結果になったのかが、運用者以外の第三者でもわかるようになっていること
+  - データ自体の版管理。ここは機械学習プロダクトの鬼門ではないか。シンプルなプロダクトにおいては、特定のディレクトリやDBから任意のデータを引っ張ってくるようなことをしがちだが、同じ名前だからといって同じデータとは限らない。どこまでコストをかけてチェックするかは悩みどころ。
+  
+
+  
   - https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-dg.pdf
   - その気になれば開発、学習、サービングの全部ができる
   - 最近Airflowと統合を発表。preprocessどうするんだろう？
@@ -57,7 +65,11 @@
 
 
 
-- mlflow 単体
+- mlflowはDatabricksから提供されている、機械学習モデルのライフサイクルをE2Eで管理するためのツールです。
+- 主に、モデル構築の実験を一覧性を持って記録してくれるMLflow Traking、パイプラインそのものをパッケージにしてしまい再利用可能にするためのMLflow Projects、機械学習モデルをサービングするためにフォーマットしてくれるMLflow Modelsの3つのコンポーネントがあります。
+- MLflow Projectsはタスクランナーの位置づけ、MLflow ModelsはSagemakerやCMLEの位置づけにありますが、敢えてマイナーかつベータ版であるmlflowを使うことはエンジニアリソースの少ない環境ではハマりポイントになりそうです。
+- 一方で、MLflow Trackingは現状でMLのパイプライン全体に影響は及ばさず、仮にこれが動かなくても機械学習機能をサービスすることはできますが、
+- https://www.mlflow.org/docs/latest/tracking.html
   - 組み合わせでOK？
   - 実際そうしている: 家入記事
 
