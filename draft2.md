@@ -64,13 +64,17 @@
   - Airflowとの統合あったぽいhttps://airflow.readthedocs.io/en/stable/_modules/airflow/contrib/operators/awsbatch_operator.htm
 
 
-
-- mlflowはDatabricksから提供されている、機械学習モデルのライフサイクルをE2Eで管理するためのツールです。
+- [mlflow](https://www.mlflow.org/docs/latest/tracking.html)はDatabricksから提供されている、機械学習モデルのライフサイクルをE2Eで管理するためのツールです。
 - 主に、モデル構築の実験を一覧性を持って記録してくれるMLflow Traking、パイプラインそのものをパッケージにしてしまい再利用可能にするためのMLflow Projects、機械学習モデルをサービングするためにフォーマットしてくれるMLflow Modelsの3つのコンポーネントがあります。
-- MLflow Projectsはタスクランナーの位置づけ、MLflow ModelsはSagemakerやCMLEの位置づけにありますが、敢えてマイナーかつベータ版であるmlflowを使うことはエンジニアリソースの少ない環境ではハマりポイントになりそうです。
-- 一方で、MLflow Trackingは現状でMLのパイプライン全体に影響は及ばさず、仮にこれが動かなくても機械学習機能をサービスすることはできますが、
-- https://www.mlflow.org/docs/latest/tracking.html
+- この中でML Trackingは割と手軽に実験の結果のログを残してくれるのツールとして期待しています。下記のように記録したい対象を設定してやるだけ。
+- 同様の機能は例えばSagemakerであればハイパラの自動チューニングの結果表示として使ってやる必要があり、カスタムのDockerをアップロードしてやるなど、多少手間がかかる印象です。
+- MLflowの他の機能としては、Projectsはタスクランナーの位置づけ、ModelsはSagemakerやCMLEの位置づけにありますが、敢えてマイナーかつベータ版であるmlflowを使うことはエンジニアリソースの少ない環境ではハマりポイントになりそうです。一方で、MLflow Trackingは現状でMLのパイプライン全体に影響は及ばさず、仮にこれが動かなくても機械学習機能をサービスすることができる点も実運用の観点からは大きいのではないでしょうか。
+- 実際にクラウドサービスを中心にパイプラインを構築した上で、学習の実験管理の部分だけMLflowにしたものを試している[^1]
   - 組み合わせでOK？
   - 実際そうしている: 家入記事
 
- − kubeflow pipeline
+ - kubeflow pipeline
+  - 
+  
+  
+  [^1]: テスト
